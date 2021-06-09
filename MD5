@@ -1,6 +1,6 @@
-796d31284dde1359705284a1e6f0ec8f *DESCRIPTION
+140d9cc30ec227653b121005c864f1ae *DESCRIPTION
 b902ece8bd47dc51d6717016933a06a3 *NAMESPACE
-946d0e43af08f39235ff6070c9b69889 *NEWS.md
+2bb6028a50cc1e72d0ded9e88e47afe2 *NEWS.md
 34df10962de6a9e289b4adad0cf5eaef *R/RcppExports.R
 8b1c1a93bba497d2bf39235457c7cdc6 *R/assay.R
 207449e710f467a0f0f9a45938c370e1 *R/command.R
@@ -13,7 +13,7 @@ f3b2ea70c11935ca1ced2f4c04aec303 *R/graph.R
 ebb286d75a41e5a53dbbceb92317d0be *R/neighbor.R
 3e73e4a4cbc374211e47ec1cd414fa82 *R/seurat.R
 dd6304c4ada4f3cb6dd6b946e0de4c17 *R/spatial.R
-e69322c4ea83c907f7d41f78fe6c503e *R/utils.R
+a185d2fe67d53f39c3bd2e514052b776 *R/utils.R
 019f91eae14530082ce623583747cc4d *R/zzz.R
 674c3364ad5d96d39b25c4cd5b40af1d *data/pbmc_small.rda
 0b29a4923fffe787efc5328f9e2a7c5e *man/AddMetaData.Rd

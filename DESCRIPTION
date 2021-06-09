@@ -1,8 +1,8 @@
 Package: SeuratObject
 Type: Package
 Title: Data Structures for Single Cell Data
-Version: 4.0.1
-Date: 2021-05-07
+Version: 4.0.2
+Date: 2021-06-08
 Authors@R: c(
   person(given = 'Rahul', family = 'Satija', email = 'rsatija@nygenome.org', role = 'aut', comment = c(ORCID = '0000-0001-9448-8833')),
   person(given = 'Andrew', family = 'Butler', email = 'abutler@nygenome.org', role = 'aut', comment = c(ORCID = '0000-0003-3608-0463')),
@@ -38,7 +38,7 @@ Collate: 'RcppExports.R' 'utils.R' 'zzz.R' 'generics.R' 'assay.R'
         'graph.R' 'neighbor.R' 'spatial.R' 'seurat.R'
 LinkingTo: Rcpp, RcppEigen
 NeedsCompilation: yes
-Packaged: 2021-05-07 21:02:08 UTC; paul
+Packaged: 2021-06-08 19:04:05 UTC; paul
 Author: Rahul Satija [aut] (<https://orcid.org/0000-0001-9448-8833>),
   Andrew Butler [aut] (<https://orcid.org/0000-0003-3608-0463>),
   Paul Hoffman [aut, cre] (<https://orcid.org/0000-0002-7693-8957>),
@@ -50,4 +50,4 @@ Author: Rahul Satija [aut] (<https://orcid.org/0000-0001-9448-8833>),
   Yuhan Hao [ctb] (<https://orcid.org/0000-0002-1810-0822>)
 Maintainer: Paul Hoffman <seurat@nygenome.org>
 Repository: CRAN
-Date/Publication: 2021-05-08 04:50:06 UTC
+Date/Publication: 2021-06-09 09:20:05 UTC
