@@ -1,9 +1,9 @@
-8faa885b294682c7f5ebab866e0d453f *DESCRIPTION
+02be6c9955dea2b37bf215934424f76b *DESCRIPTION
 51a445d321e29ebb29fee2b069584f4b *LICENSE
-46612cef173fd8b01b8a15181a433df2 *NAMESPACE
-3e9484edc72514df468360209f6211a9 *NEWS.md
+507b0c7bf530864131e94390f9cdd03a *NAMESPACE
+e733b0136c84478fd10598d9fb56018f *NEWS.md
 34df10962de6a9e289b4adad0cf5eaef *R/RcppExports.R
-8b1c1a93bba497d2bf39235457c7cdc6 *R/assay.R
+71961c66c9a8dbe63ceee1f7480ae527 *R/assay.R
 207449e710f467a0f0f9a45938c370e1 *R/command.R
 55fbb8a1de4de27bc7a49e56141cb30a *R/data.R
 fecce2418002e48348f9578fa7bded2c *R/default.R
@@ -12,9 +12,9 @@ c64aef458bb5e6e6b8c5534562b34341 *R/dimreduc.R
 f3b2ea70c11935ca1ced2f4c04aec303 *R/graph.R
 58b8af27bef1b9d90d5709917ee214c4 *R/jackstraw.R
 ebb286d75a41e5a53dbbceb92317d0be *R/neighbor.R
-6742c8b45e4a1b800a5091417240727d *R/seurat.R
+5df4d5eabb20adc872236ba39aa87bd2 *R/seurat.R
 dd6304c4ada4f3cb6dd6b946e0de4c17 *R/spatial.R
-57e38e86afd9391724715648038a8157 *R/utils.R
+ca93bdc8aa088622d76734d5a1aad46c *R/utils.R
 019f91eae14530082ce623583747cc4d *R/zzz.R
 674c3364ad5d96d39b25c4cd5b40af1d *data/pbmc_small.rda
 0b29a4923fffe787efc5328f9e2a7c5e *man/AddMetaData.Rd
@@ -27,8 +27,9 @@ d6e2b16f3d13eae7211519917b7c4c0e *man/Assay-class.Rd
 62f8158d220be99ebf294149a990869d *man/CellsByImage.Rd
 6cc1f889cd0dcf3f0a7736002ba24ef7 *man/CheckDots.Rd
 da8078655056e8130c36c9cb7ba29bd1 *man/CheckGC.Rd
+eb4894c30e5dc763a5081c163cdc485e *man/CheckMatrix.Rd
 07575870555b49149ac81395bb3bb397 *man/Command.Rd
-dfc308c16726bacd3a7f38456cc22096 *man/CreateAssayObject.Rd
+a73658fcc5f4c7b4682a712f9ca12e8f *man/CreateAssayObject.Rd
 2df165472c7fba58f02091b6f729a45c *man/CreateDimReducObject.Rd
 385c849132b720254d9a1f187ca78aef *man/CreateSeuratObject.Rd
 0b65c80e29d6b4788947d882e096f499 *man/DefaultAssay.Rd
@@ -69,7 +70,7 @@ c1222a20600188a7ab68db49ccffc00a *man/RenameCells.Rd
 6df8c75ebb44e8ce45d97051aed15605 *man/Seurat-methods.Rd
 8ff597c8d08a440809fced7b6e39dc46 *man/SeuratCommand-class.Rd
 d63b22f70a8725201ae502abbb241a3c *man/SeuratCommand-methods.Rd
-3e6cdbbfd525b99aa7f286ebd4405ff7 *man/SeuratObject-package.Rd
+3e44a35942d97f9963c04aa429a0ae78 *man/SeuratObject-package.Rd
 ee6f7075623e54c6cb43ad3818c10b93 *man/SpatialImage-class.Rd
 183df15160c1361d10470c50e24875b6 *man/SpatialImage-methods.Rd
 36d940b4f7071a8c84f5c9c5868a7eb7 *man/Stdev.Rd
@@ -87,7 +88,7 @@ a9b6c9eacfbf9b0f9daef9ee280a0716 *man/as.Seurat.Rd
 789f8cf70682dfdd6d5b7290515d5176 *man/reexports.Rd
 8c6d87f7958eadadd465799a48532c08 *man/s4list.Rd
 45641d15712d235b5fb0c9fcf6472871 *man/set-if-null.Rd
-81820cf7d824ed644119bfe25b579035 *src/RcppExports.cpp
+48564b53bdf7cadfa2a1cf088e08fa1a *src/RcppExports.cpp
 288fcd4e7664587a425de78708c7f251 *src/data_manipulation.cpp
 f99ccc0ef8d6bb241950e293d697668f *src/data_manipulation.h
 f33c09d14c160d9f29a89251fd91a036 *src/valid_pointer.c
