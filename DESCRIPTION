@@ -1,7 +1,7 @@
 Package: SeuratObject
 Type: Package
 Title: Data Structures for Single Cell Data
-Version: 5.0.0
+Version: 5.0.1
 Authors@R: c(
   person(given = 'Rahul', family = 'Satija', email = 'rsatija@nygenome.org', role = 'aut', comment = c(ORCID = '0000-0001-9448-8833')),
   person(given = 'Paul', family = 'Hoffman', email = 'seurat@nygenome.org', role = c('aut', 'cre'), comment = c(ORCID = '0000-0002-7693-8957')),
@@ -38,7 +38,7 @@ LazyData: true
 RoxygenNote: 7.2.3
 Additional_repositories: https://bnprks.r-universe.dev
 Depends: R (>= 4.0.0), sp (>= 1.5.0)
-Imports: future, future.apply, grDevices, grid, Matrix (>= 1.6.1),
+Imports: future, future.apply, grDevices, grid, Matrix (>= 1.6.3),
         methods, progressr, Rcpp (>= 1.0.5), rlang (>= 0.4.7), stats,
         tools, utils, spam, lifecycle, generics
 Suggests: DelayedArray, fs (>= 1.5.2), ggplot2, HDF5Array, rmarkdown,
@@ -52,7 +52,7 @@ LinkingTo: Rcpp, RcppEigen
 Enhances: Seurat
 Config/Needs/website: pkgdown
 NeedsCompilation: yes
-Packaged: 2023-10-24 18:55:33 UTC; paul
+Packaged: 2023-11-16 21:36:12 UTC; paul
 Author: Rahul Satija [aut] (<https://orcid.org/0000-0001-9448-8833>),
   Paul Hoffman [aut, cre] (<https://orcid.org/0000-0002-7693-8957>),
   Yuhan Hao [aut] (<https://orcid.org/0000-0002-1810-0822>),
@@ -70,4 +70,4 @@ Author: Rahul Satija [aut] (<https://orcid.org/0000-0001-9448-8833>),
   Patrick Roelli [ctb]
 Maintainer: Paul Hoffman <seurat@nygenome.org>
 Repository: CRAN
-Date/Publication: 2023-10-26 20:30:02 UTC
+Date/Publication: 2023-11-17 22:40:16 UTC
