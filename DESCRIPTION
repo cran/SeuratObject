@@ -1,10 +1,11 @@
 Package: SeuratObject
 Type: Package
 Title: Data Structures for Single Cell Data
-Version: 5.0.1
+Version: 5.0.2
 Authors@R: c(
-  person(given = 'Rahul', family = 'Satija', email = 'rsatija@nygenome.org', role = 'aut', comment = c(ORCID = '0000-0001-9448-8833')),
-  person(given = 'Paul', family = 'Hoffman', email = 'seurat@nygenome.org', role = c('aut', 'cre'), comment = c(ORCID = '0000-0002-7693-8957')),
+  person(given = 'Paul', family = 'Hoffman', email = 'hoff0792@alumni.umn.edu', role = 'aut', comment = c(ORCID = '0000-0002-7693-8957')),
+  person(given = 'Rahul', family = 'Satija', email = 'seurat@nygenome.org', role = c('aut', 'cre'), comment = c(ORCID = '0000-0001-9448-8833')),
+  person(given = 'David', family = 'Collins', email = 'dcollins@nygenome.org', role = 'aut', comment = c(ORCID = '0000-0001-9243-7821')),
   person(given = "Yuhan", family = "Hao", email = 'yhao@nygenome.org', role = 'aut', comment = c(ORCID = '0000-0002-1810-0822')),
   person(given = "Austin", family = "Hartman", email = 'ahartman@nygenome.org', role = 'aut', comment = c(ORCID = '0000-0001-7278-1852')),
   person(given = "Gesmira", family = "Molla", email = 'gmolla@nygenome.org', role = 'aut', comment = c(ORCID = '0000-0002-8628-5056')),
@@ -29,16 +30,16 @@ Description: Defines S4 classes for single-cell genomic data and associated
   Hao Y, Hao S, et al (2021) <doi:10.1016/j.cell.2021.04.048> and
   Hao Y, et al (2023) <doi:10.1101/2022.02.24.481684> for
   more details.
-URL: https://mojaveazure.github.io/seurat-object/,
-        https://github.com/mojaveazure/seurat-object
-BugReports: https://github.com/mojaveazure/seurat-object/issues
+URL: https://satijalab.github.io/seurat-object/,
+        https://github.com/satijalab/seurat-object
+BugReports: https://github.com/satijalab/seurat-object/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Additional_repositories: https://bnprks.r-universe.dev
-Depends: R (>= 4.0.0), sp (>= 1.5.0)
-Imports: future, future.apply, grDevices, grid, Matrix (>= 1.6.3),
+Depends: R (>= 4.1.0), sp (>= 1.5.0)
+Imports: future, future.apply, grDevices, grid, Matrix (>= 1.6.4),
         methods, progressr, Rcpp (>= 1.0.5), rlang (>= 0.4.7), stats,
         tools, utils, spam, lifecycle, generics
 Suggests: DelayedArray, fs (>= 1.5.2), ggplot2, HDF5Array, rmarkdown,
@@ -52,9 +53,10 @@ LinkingTo: Rcpp, RcppEigen
 Enhances: Seurat
 Config/Needs/website: pkgdown
 NeedsCompilation: yes
-Packaged: 2023-11-16 21:36:12 UTC; paul
-Author: Rahul Satija [aut] (<https://orcid.org/0000-0001-9448-8833>),
-  Paul Hoffman [aut, cre] (<https://orcid.org/0000-0002-7693-8957>),
+Packaged: 2024-05-07 15:10:19 UTC; Paul Hoffman
+Author: Paul Hoffman [aut] (<https://orcid.org/0000-0002-7693-8957>),
+  Rahul Satija [aut, cre] (<https://orcid.org/0000-0001-9448-8833>),
+  David Collins [aut] (<https://orcid.org/0000-0001-9243-7821>),
   Yuhan Hao [aut] (<https://orcid.org/0000-0002-1810-0822>),
   Austin Hartman [aut] (<https://orcid.org/0000-0001-7278-1852>),
   Gesmira Molla [aut] (<https://orcid.org/0000-0002-8628-5056>),
@@ -68,6 +70,6 @@ Author: Rahul Satija [aut] (<https://orcid.org/0000-0001-9448-8833>),
   Shiwei Zheng [ctb] (<https://orcid.org/0000-0001-6682-6743>),
   Christoph Hafemeister [ctb] (<https://orcid.org/0000-0001-6365-8254>),
   Patrick Roelli [ctb]
-Maintainer: Paul Hoffman <seurat@nygenome.org>
+Maintainer: Rahul Satija <seurat@nygenome.org>
 Repository: CRAN
-Date/Publication: 2023-11-17 22:40:16 UTC
+Date/Publication: 2024-05-08 13:40:06 UTC
