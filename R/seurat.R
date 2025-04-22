@@ -873,7 +873,7 @@ UpdateSeuratObject <- function(object) {
         misc = object@misc %||% list(),
         active.ident = object@ident,
         reductions = new.dr,
-        meta.data = object@meta.data,
+        meta.data = droplevels(object@meta.data),
         tools = list()
       )
       # Run CalcN
@@ -994,7 +994,7 @@ UpdateSeuratObject <- function(object) {
         sd.features <- rownames(x = slot(object = assay, name = "scale.data"))
         data.features <- rownames(x = slot(object = assay, name = "data"))
         md.features <- rownames(x = slot(object = assay, name = "meta.features"))
-        if (!all.equal(target = md.features, current = data.features, check.attributes = FALSE)) {
+        if (!identical(md.features, data.features)) {
           slot(object = assay, name = "meta.features") <- slot(object = assay, name = "meta.features")[data.features, ]
         }
         sd.order <- sd.features[order(match(x = sd.features, table = data.features))]
@@ -2324,9 +2324,12 @@ RenameCells.Seurat <- function(
 ) {
   CheckDots(...)
   object <- UpdateSlots(object = object)
-  working.cells <- Cells(x = object)
+
+  all.cells <- colnames(object)
+  default.cells <- Cells(object)
+
   if (is_present(arg = for.merge)) {
-    .Deprecate(when = '5.0.0', what = 'RenameCells(for.merge = )')
+    .Deprecate(when = "5.0.0", what = "RenameCells(for.merge = )")
   }
   if (is_missing(x = add.cell.id) && is_missing(x = new.names)) {
     abort(message = "One of 'add.cell.id' and 'new.names' must be set")
@@ -2335,35 +2338,62 @@ RenameCells.Seurat <- function(
     abort(message = "Only one of 'add.cell.id' and 'new.names' may be set")
   }
   if (!missing(x = add.cell.id)) {
-    new.cell.names <- paste(add.cell.id, working.cells, sep = "_")
+    new.names <- paste(add.cell.id, all.cells, sep = "_")
+    cells.to.rename <- all.cells
   } else {
-    if (length(x = new.names) == length(x = working.cells)) {
-      new.cell.names <- new.names
+    # Determine which set of cells names `new.names` is intended to replace.
+    # If `new.names` is a named vector, assume it should provide the mapping
+    # we need.
+    if (!is.null(names(new.names))) {
+      cells.to.rename <- names(new.names)
     } else {
-      abort(message = paste0(
-        "the length of 'new.names' (",
-        length(x = new.names),
-        ") must be the same as the number of cells (",
-        length(x = working.cells),
-        ")"
-      ))
+      # If `new.names` contains a value for every cell in the object, we'll
+      # assume that `new.names` and `all.cells` are co-indexed.
+      if (length(new.names) == length(all.cells)) {
+        cells.to.rename <- all.cells
+        # If `new.names` contains a value for every cell in the default assay,
+        # we'll assume that `new.names` and `default.cells` are co-indexed.
+      } else if (length(new.names) == length(default.cells)) {
+        cells.to.rename <- default.cells
+        # If the length of `new.names` doesn't match either option, we don't
+        # know what cells to rename, so we'll throw an error.
+      } else {
+        stop(
+          sprintf(
+            paste(
+              "`new.names` should be a named list or else be the same length",
+              "as `colnames(object)` (%i) or `Cells(object)` (%i).",
+              "`length(new.names)` was %i."
+            ),
+            length(all.cells),
+            length(default.cells),
+            length(new.names)
+          )
+        )
+      }
     }
   }
-  old.names <- colnames(x = object)
-  new.cell.names.global <- old.names
-  new.cell.names.global[match(x = working.cells, table = old.names)] <- new.cell.names
-  new.cell.names <- new.cell.names.global
+
+  # Validate that `cells.to.rename` only contains valid cell names.
+  missing.cells <- setdiff(cells.to.rename, all.cells)
+  if (length(missing.cells) > 0) {
+    stop("The following cells are not present in `object`: ...")
+  }
+
+  # Create a global mapping for all cell names in `object`.
+  new.cell.names <- setNames(all.cells, all.cells)
+  new.cell.names[cells.to.rename] <- new.names
+
   # rename the cell-level metadata first to rename colname()
   old.meta.data <- object[[]]
   row.names(x = old.meta.data) <- new.cell.names
   slot(object = object, name = "meta.data") <- old.meta.data
   # rename the active.idents
-  old.ids <- Idents(object = object)
-  names(x = old.ids) <- new.cell.names
-  Idents(object = object) <- old.ids
-  names(x = new.cell.names) <- old.names
+  old.ids <- Idents(object)
+  names(old.ids) <- new.cell.names
+  Idents(object) <- old.ids
   # rename in the assay objects
-  assays <- .FilterObjects(object = object, classes.keep = 'Assay')
+  assays <- .FilterObjects(object = object, classes.keep = "Assay")
   for (i in assays) {
     slot(object = object, name = "assays")[[i]] <- RenameCells(
       object = object[[i]],
@@ -2371,7 +2401,7 @@ RenameCells.Seurat <- function(
     )
   }
   # rename in the assay5 objects
-  assays5 <- .FilterObjects(object = object, classes.keep = 'Assay5')
+  assays5 <- .FilterObjects(object = object, classes.keep = "Assay5")
   for (i in assays5) {
     slot(object = object, name = "assays")[[i]] <- RenameCells(
       object = object[[i]],
@@ -2379,7 +2409,7 @@ RenameCells.Seurat <- function(
     )
   }
   # rename in the DimReduc objects
-  dimreducs <- .FilterObjects(object = object, classes.keep = 'DimReduc')
+  dimreducs <- .FilterObjects(object = object, classes.keep = "DimReduc")
   for (i in dimreducs) {
     slot(object = object, name = "reductions")[[i]] <- RenameCells(
       object = object[[i]],
@@ -2786,19 +2816,7 @@ WhichCells.Seurat <- function(
     } else {
       parse(text = expression)
     }
-    expr.char <- suppressWarnings(expr = as.character(x = expr))
-    expr.char <- unlist(x = lapply(X = expr.char, FUN = strsplit, split = ' '))
-    expr.char <- gsub(
-      pattern = '(',
-      replacement = '',
-      x = expr.char,
-      fixed = TRUE
-    )
-    expr.char <- gsub(
-      pattern = '`',
-      replacement = '',
-      x = expr.char
-    )
+    expr.char <- all.vars(expr)
     vars.use <- which(
       x = expr.char %in% rownames(x = object) |
         expr.char %in% colnames(x = object[[]]) |
@@ -3401,13 +3419,6 @@ merge.Seurat <- function(
         message = "Please provide a cell identifier for each object provided to merge"
       )
     }
-    # for (i in seq_along(along.with = add.cell.ids)) {
-    #   colnames(x = objects[[i]]) <- paste(
-    #     colnames(x = objects[[i]]),
-    #     add.cell.ids[[i]],
-    #     sep = '_'
-    #   )
-    # }
     for (i in 1:length(x = objects)) {
       objects[[i]] <- RenameCells(object = objects[[i]], add.cell.id = add.cell.ids[i])
     }
@@ -3431,10 +3442,6 @@ merge.Seurat <- function(
     simplify = FALSE,
     USE.NAMES = TRUE
   )
-  # TODO: Handle merging v3 and v5 assays
-  # if (any(sapply(X = assay.classes, FUN = length) != 1L)) {
-  #   stop("Cannot merge assays of different classes")
-  # }
   assays.all <- vector(mode = 'list', length = length(x = assays))
   names(x = assays.all) <- assays
   for (assay in assays) {
@@ -3453,7 +3460,7 @@ merge.Seurat <- function(
     assays.all[[assay]] <- merge(
       x = objects[[idx.x]][[assay]],
       y = lapply(X = objects[idx.y], FUN = '[[', assay),
-      labels = projects,
+      labels = projects[assay.objs],
       add.cell.ids = NULL,
       collapse = collapse,
       merge.data = merge.data
@@ -3698,7 +3705,13 @@ subset.Seurat <- function(
   # Remove metadata for cells not present
   orig.cells <- colnames(x = x)
   cells <- intersect(x = orig.cells, y = cells)
-  slot(object = x, name = 'meta.data') <- x[[]][cells, , drop = FALSE]
+  
+  # Subset cell-level metadata.
+  meta.data <- x[[]]
+  meta.data <- meta.data[cells, , drop = FALSE]
+  meta.data <- droplevels(meta.data)
+  slot(object = x, name = 'meta.data') <- meta.data
+  
   if (!all(orig.cells %in% cells)) {
     # Remove neighbors
     slot(object = x, name = 'neighbors') <- list()
