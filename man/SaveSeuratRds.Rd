@@ -63,10 +63,11 @@ render status updates and progress bars. To enable progress updates, wrap
 the function call in \code{\link[progressr]{with_progress}} or run
 \code{\link[progressr:handlers]{handlers(global = TRUE)}} before running
 this function. For more details about \pkg{progressr}, please read
-\href{https://progressr.futureverse.org/articles/progressr-intro.html}{\code{vignette("progressr-intro")}}
+\href{https://progressr.futureverse.org/articles/progressr-01-intro.html}{\code{vignette("progressr-intro")}}
 }
 
 \examples{
+\dontrun{
 if (requireNamespace("fs", quietly = TRUE)) {
   # Write out with DelayedArray
   if (requireNamespace("HDF5Array", quietly = TRUE)) {
@@ -116,6 +117,7 @@ if (requireNamespace("fs", quietly = TRUE)) {
     pbmc2
     pbmc2[["disk"]]
   }
+}
 }
 
 }

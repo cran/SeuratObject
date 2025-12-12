@@ -1338,8 +1338,6 @@ ListToS4 <- function(x) {
 #' \code{PackageCheck} was deprecated in version 5.0.0; please use
 #' \code{\link[rlang:check_installed]{rlang::check_installed}()} instead
 #'
-#' @examples
-#' PackageCheck("SeuratObject", error = FALSE)
 #'
 PackageCheck <- function(..., error = TRUE) {
   .Deprecate(
@@ -1520,6 +1518,32 @@ RowMergeSparseMatrices <- function(mat1, mat2) {
   }
   colnames(x = new.mat) <- make.unique(names = unlist(x = all.colnames))
   return(new.mat)
+}
+
+#' Improve S4 validity error messages
+#'
+#' Catch errors from validObject to allow for more informative error messages.
+#'
+#' (R's internal validation checking--including making sure the object has all slots in the class definition--
+#' occurs before the custom validity method for a class is run. Errors originating from an internal check may be
+#' confusing to users, hence they can be modified here to provide more helpful messages.)
+#'
+#' @keywords internal
+#' @noRd
+#'
+safeValidityCheck <- function(object) {
+  tryCatch(
+    expr = {
+      validObject(object = object)
+    },
+    error = function(e) {
+      if (grepl(pattern = "slots in class definition but not in object", x = e$message)) {
+        e <- simpleError(message = paste0("Consider running UpdateSeuratObject; ", conditionMessage(e)),
+                        call = conditionCall(e))
+      }
+      stop(e)
+    }
+  )
 }
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
